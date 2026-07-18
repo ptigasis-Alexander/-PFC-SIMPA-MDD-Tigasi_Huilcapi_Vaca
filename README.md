@@ -1,4 +1,4 @@
-# PFC-SIMPA-MDD-
+# Exposicion Segundo corte Herramientas CASE aplicadas en la pratica a PFC-SIMPA-MDD
 
 Exposición y demostración práctica del ciclo completo de **Model-Driven Development (MDD)** aplicado al subsistema de **Monitoreo Fitosanitario y Gestión de Labores Agrícolas** del **SIMPA (Sistema Inteligente de Mantenimiento de Palma Africana)**, desarrollado para la asignatura **Ingeniería de Requisitos** de la **Universidad Técnica Estatal de Quevedo (UTEQ)**, período académico **2026–2027 PPA**.
 
@@ -8,9 +8,9 @@ Exposición y demostración práctica del ciclo completo de **Model-Driven Devel
 
 | Integrante | Fase liderada |
 |------------|---------------|
-| Tigasi Sampedro Paul Alexander | Marco teórico, redacción en LaTeX, README y referencias |
-| Huilcapi [Leon Denisses Fabiola  | Configuración del generador, generación de código y Roundtrip Engineering |
-| Vaca Romero David Octavio| Modelado UML, trazabilidad y verificación del modelo |
+| Tigasi Sampedro Paul Alexander | 	Documentación completa en Latex, creación y administración del repositorio GitHub, elaboración del README, investigación y exploración de Enterprise Architect, validación de funcionalidades CASE, apoyo al equipo en el uso de la herramienta e integración del informe final. |
+| Huilcapi Leon Denisses Fabiola  |	Configuración del generador de código, ejecución del Forward Engineering, verificación de compilación, pruebas de Round-Trip Engineering, elaboración de diapositivas y organización de reuniones del equipo. |
+| Vaca Romero David Octavio| Modelado UML, aplicación de estereotipos, implementación de la trazabilidad mediante Traceability y Relationship Matrix, verificación de funcionalidades de Enterprise Architect y validación del modelo de Edit Code Templet. |
 
 ---
 
