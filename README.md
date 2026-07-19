@@ -63,14 +63,15 @@ PFC-SIMPA-MDD-LaGeneracionIA
 │   └── SIMPA_MDD.qea
 │
 ├── generado/
-│   └── Modelos/
+│   
 │
 ├── docs/
 │   ├── informe.tex
-│   └── informe.pdf
+    │    └── informe.pdf
+│   ├── figura.pdf
 │
 ├── evidencias/
-│   └── video-demo.mp4
+│   └── Capturas
 │
 └── README.md
 ```
