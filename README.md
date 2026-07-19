@@ -5,14 +5,10 @@ Exposición y demostración práctica del ciclo completo de **Model-Driven Devel
 ---
 
 # Integrantes del equipo
-
 | Integrante | Fase liderada |
 |------------|---------------|
-| Tigasi Sampedro Paul Alexander | 	Documentación completa en Latex, creación y administración del repositorio GitHub, elaboración del README, investigación y exploración de Enterprise Architect, validación de funcionalidades CASE, apoyo al equipo en el uso de la herramienta e integración del informe final. |
-| Huilcapi Leon Denisses Fabiola  |	Configuración del generador de código, ejecución del Forward Engineering, verificación de compilación, pruebas de Round-Trip Engineering, elaboración de diapositivas y organización de reuniones del equipo. |
-| Vaca Romero David Octavio| Modelado UML, aplicación de estereotipos, implementación de la trazabilidad mediante Traceability y Relationship Matrix, verificación de funcionalidades de Enterprise Architect y validación del modelo de Edit Code Templet. |
-
----
+| Tigasi Sampedro Paul Alexander | Documentación completa en LaTeX, creación y administración del repositorio GitHub, elaboración del README, investigación y exploración de Enterprise Architect, modelado UML del subsistema, aplicación de estereotipos, validación de funcionalidades CASE, apoyo al equipo en el uso de la herramienta e integración del informe final.Configuración del generador de código, ejecución del Forward Engineering |
+| Huilcapi Leon Denisses Fabiola |Verificación de compilación, pruebas de Round-Trip Engineering, implementación de la trazabilidad mediante Traceability y Relationship Matrix, validación del modelo de Edit Code Template, elaboración de diapositivas y organización de reuniones del equipo. |
 
 # Descripción del proyecto
 
