@@ -1,0 +1,79 @@
+***Atributos código por defecto ***
+%if attTag:"Attribute" != ""%
+%REPLACE(attTag:"Attribute", ";", "\n")%
+%endIf%
+
+%if classStereotype == "enumeration"%
+%PI=""%
+%attName%
+%attInitial ? " = " value%
+%endTemplate%
+
+%PI=" "%
+%CONVERT_SCOPE(attScope)%
+%attStatic=="T" ? "static" : ""%
+%attConst=="T" ? "readonly" : ""%
+%attVolatile=="T" ? "volatile" : ""%
+%attTag:"const" ? "const" : ""%
+%attTag:"fixed" ? "fixed" : ""%
+%attTag:"required" ? "required" : ""%
+%RESOLVE_QUALIFIED_TYPE(".", "int")%
+
+%if attTag:"fixed"=="true"%
+%PI=""%
+%attName%
+%if attCollection == "T" and attContainerType != ""%
+%attContainerType%
+%endIf%
+%else%
+%if attCollection == "T" and attContainerType != ""%
+%attContainerType%
+%endIf%
+
+%PI=""%
+%attName%
+%endIf%
+
+
+%attInitial ? " = " value%
+
+%PI=""%
+%if attStereotype == "property"%
+$Value = %attTag:"Automatic" ? value%
+%if attTag:"readonly"=="true"%
+{%attTag:"GetScope"% get;} 
+%elseIf attTag:"writeonly"=="true"%
+{%attTag:"SetScope"% set;} 
+%else%
+{%attTag:"GetScope"% get; %attTag:"SetScope"% set;} 
+%endIf%
+%endTemplate%
+;
+
+
+generado nuevo edit 
+
+%if attStereotype == "property"%
+
+
+%if attTag:"Key" != ""%
+[Key]
+%endIf%
+
+
+%CONVERT_SCOPE(attScope)%
+
+%RESOLVE_QUALIFIED_TYPE(".", "string")%
+
+%attName% { get; set; }
+
+
+%else%
+
+
+%CONVERT_SCOPE(attScope)%
+%RESOLVE_QUALIFIED_TYPE(".", "string")%
+%attName%;
+
+
+%endIf%
