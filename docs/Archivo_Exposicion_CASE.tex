@@ -1,0 +1,517 @@
+\documentclass[11pt,a4paper]{article}
+
+% ===================== Paquetes =====================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\graphicspath{{C:/Users/USER/Desktop/ACT Universidad/Archivo_Latex_DFC/Imagenes_DCF_IR_LATEX}}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{float}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\setlist[itemize]{label=\textbullet}
+% ===================== Colores institucionales UTEQ =====================
+\definecolor{uteqblue}{HTML}{1F4E78}
+\definecolor{uteqlight}{HTML}{D9E6F2}
+\definecolor{headergray}{HTML}{E7E6E6}
+
+\titleformat{\section}{\normalfont\Large\bfseries\color{black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{black}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	urlcolor=uteqblue,
+	pdftitle={Informe Evidencia - MDD UML a Codigo - SIMPA},
+	pdfauthor={Tigasi, Huilcapi, Vaca}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small Ingeniería de Requisitos}
+\fancyfoot[C]{\thepage}
+
+\sloppy % evita que la URL del repositorio se parta entre renglones
+
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+	
+	% ===================== CARÁTULA =====================
+	\begin{titlepage}
+		\centering
+		\vspace*{0.5cm}
+		
+		
+		{\large \textbf{UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO}}\\
+		\vspace{0.15cm}
+		{\normalsize Facultad de Ciencias de la Computación y Diseño Digital}\\
+		{\normalsize Carrera de Ingeniería en Software}
+		
+		
+		
+		\vspace{1.5cm}
+		{\Large \textbf{Exposición con demostración práctica}}\\[0.3cm]
+		{\large \textit{Herramientas CASE}}\\[0.2cm]
+		{\normalsize Aplicado al Proyecto Fin de Curso (PFC)}
+		
+		\vspace{1.2cm}
+		{\Large \textbf{Caso de aplicación: SIMPA}}\\[0.15cm]
+		{\normalsize Sistema Inteligente de Mantenimiento de Palma Africana}\\[0.15cm]
+		{\normalsize Subsistema modelado: Monitoreo Fitosanitario y Gestión de Labores Agrícolas}
+		
+		\vspace{1.5cm}
+		\begin{tabular}{ll}
+			\textbf{Asignatura:} & Ingeniería de Requisitos \\
+			\textbf{Docente:} & Ing. Gleiston Guerrero Ulloa, PhD. \\
+			\textbf{Paralelo:} &  4to Software A \\
+			\textbf{Herramienta MDD utilizada:} & Enterprise Architect (Sparx Systems) \\
+			\textbf{Lenguaje objetivo:} & C\#  \\
+		\end{tabular}
+		
+		\vspace{1.2cm}
+		
+		
+		\begin{center}
+			\centering
+			\renewcommand{\arraystretch}{1.2}
+			{\normalsize \textbf{Integrantes del equipo y sus roles:}}\\
+			\vspace{0.5cm}
+			\label{tab:integrantes}
+			
+			\begin{tabularx}{\textwidth}{lXX}
+				\toprule
+				
+				\textbf{Integrante} & \textbf{Rol} \\
+				\hline
+				Tigasi Sampedro Paul Alexander &
+				Investigación del marco teórico, redacción completa del informe en LaTeX, documentación del modelo, elaboración del README del repositorio y capacitación al equipo en las funciones principales y el uso de Enterprise Architect. \\
+				\hline
+				Huilcapi León Denisses Fabiola &
+				Configuración del generador de código en Enterprise Architect, ejecución del Forward Engineering y verificación de la generación y compilación del código resultante. \\
+				\hline
+				Vaca Romero David Octavio &
+				Modelado UML del subsistema, implementación de la trazabilidad (Traceability), verificación de funcionalidades del sistema y grabación de la demo en video de la práctica. \\
+				
+				\bottomrule
+			\end{tabularx}
+		\end{center}
+		
+		\vspace{1.0cm}
+		{\normalsize \textbf{Repositorio del proyecto:}}\\
+		\vspace{0.5cm}
+		\href{https://github.com/ptigasis-Alexander/-PFC-SIMPA-MDD-Tigasi_Huilcapi_Vaca}{Link de repositorio de GitHub}
+		
+		\vfill
+		
+	\end{titlepage}
+	
+	% ===================== RESUMEN =====================
+	\section*{Resumen}
+	El presente informe documenta la aplicación del ciclo completo de \textit{Model-Driven Development} (MDD) sobre un subsistema representativo del Sistema Inteligente de Mantenimiento de Palma Africana (SIMPA), correspondiente al Proyecto Fin de Curso del equipo. Se seleccionó Enterprise Architect como herramienta MDD por su soporte maduro de plantillas de generación de código en C\#/.NET, alineado con la plataforma objetivo del PFC. Se modeló el subsistema de \textit{Monitoreo Fitosanitario y Gestión de Labores Agrícolas}, compuesto por once clases del dominio con relaciones de asociación, composición, agregación y generalización. A partir de dicho modelo se configuró y ejecutó el mecanismo de generación de código, se verificó la compilación y ejecución de una unidad demostrable, y se evidenció el cierre del ciclo mediante una prueba de \textit{roundtrip} controlada. El trabajo se organiza en un repositorio público de GitHub con evidencia de contribución de cada integrante.
+	
+	\vspace{0.3cm}
+	\textbf{Palabras clave:} Model-Driven Development, MDA, UML, Enterprise Architect, generación de código, ingeniería de requisitos.
+	
+	\newpage
+	\tableofcontents
+	\newpage
+	
+	% ===================== MARCO TEÓRICO =====================
+	\section{Marco teórico}
+	
+	\subsection{Model-Driven Engineering (MDE), MDA y MDD}
+	\textit{Model-Driven Engineering} (MDE) es el paradigma de desarrollo de software en el cual los modelos dejan de ser documentos de apoyo y pasan a constituir artefactos de primera clase del proceso: el modelo se convierte en la fuente autoritativa del sistema, y las implementaciones se derivan de él mediante transformaciones automatizadas \cite{schmidt2006}, \cite{bucchiarone2020}.
+	
+	\textit{Model-Driven Architecture} (MDA) es la iniciativa del \textit{Object Management Group} (OMG) que estructura el desarrollo en tres niveles de abstracción \cite{omg_mda2014}:
+	\begin{itemize}[nosep]
+		\item \textbf{CIM} (\textit{Computation Independent Model}): representa el dominio y las reglas de negocio, independiente de cualquier consideración computacional. En el caso del SIMPA corresponde a los procesos agrícolas del cultivo de palma africana.
+		\item \textbf{PIM} (\textit{Platform Independent Model}): describe la lógica del sistema sin atarse a una plataforma de despliegue concreta. Corresponde al diagrama de clases de dominio presentado en la Sección \ref{sec:modelo}, previo a la aplicación del perfil C\#/.NET.
+		\item \textbf{PSM} (\textit{Platform Specific Model}): el mismo modelo, enriquecido con estereotipos y valores etiquetados específicos de la plataforma objetivo (perfil «Entity» orientado a Entity Framework Core).
+	\end{itemize}
+	
+	\textit{Model-Driven Development} (MDD) es la aplicación práctica de MDE al ciclo de vida del software: los modelos guían la construcción del sistema y el código fuente se obtiene, total o parcialmente, mediante generadores automáticos \cite{selic2003}, \cite{brambilla2017}.
+	
+	\subsection{Transformaciones M2M y M2T}
+	Las transformaciones \textbf{modelo-a-modelo (M2M)} producen un modelo destino a partir de uno de origen, ambos conformes a metamodelos (por ejemplo, PIM $\rightarrow$ PSM). El estándar OMG de referencia es \textit{Query/View/Transformation} (QVT) v1.3 \cite{omg_qvt2016}.
+	
+	Las transformaciones \textbf{modelo-a-texto (M2T)} producen artefactos textuales —código fuente, configuración, documentación— a partir de un modelo. El estándar OMG de referencia es \textit{MOF Model to Text} (MOFM2T) v1.0 \cite{omg_mofm2t2008}. En este trabajo, Enterprise Architect ejecuta una transformación M2T directa: del modelo de clases PSM se obtiene código fuente C\# mediante sus plantillas de generación internas (\textit{Code Templates}).
+	
+	\subsection{Metamodelo y perfiles UML}
+	Un \textbf{metamodelo} define la sintaxis abstracta de un lenguaje de modelado; UML se define sobre MOF (\textit{Meta Object Facility}) \cite{omg_uml2017}. Los \textbf{perfiles UML} extienden el metamodelo mediante estereotipos, valores etiquetados y restricciones aplicables a un dominio o plataforma concreta. En el modelo del SIMPA se aplicó el estereotipo \texttt{«Entity»} sobre las clases de dominio, de modo que el generador de Enterprise Architect produzca clases persistibles mediante Entity Framework Core.
+	
+	\subsection{Forward, reverse y round-trip engineering}
+	El \textit{forward engineering} consiste en generar código a partir del modelo; el \textit{reverse engineering}, en recuperar el modelo a partir del código; y el \textit{round-trip engineering} mantiene ambas direcciones sincronizadas. Este trabajo demuestra el ciclo \textit{forward} completo y, de forma controlada, un \textit{roundtrip}: un cambio introducido en el modelo se refleja en el código tras la regeneración (Sección \ref{sec:roundtrip}).
+	
+	\subsection{Estado del arte}
+	El campo de las transformaciones de modelos cuenta con más de 60 herramientas catalogadas \cite{kahani2019}, y persisten retos abiertos en escalabilidad, interoperabilidad y adopción industrial \cite{bucchiarone2020}, \cite{whittle2014}.
+	
+	% ===================== JUSTIFICACIÓN HERRAMIENTA =====================
+	\section{Justificación de la selección de la herramienta}
+	
+	El PFC del equipo (SIMPA) está desarrollado sobre la plataforma \textbf{C\# / .NET}, con persistencia mediante \textbf{Entity Framework Core}. Frente a este requisito se evaluaron tres alternativas:
+	
+	\begin{center}
+		\begin{tabularx}{\textwidth}{lXX}
+			\toprule
+			\textbf{Herramienta} & \textbf{A favor} & \textbf{En contra (para este PFC)} \\
+			\midrule
+			\textbf{Enterprise Architect} & Plantillas de generación de código y documentación editables (\textit{Code Templates}), MDG Technology para perfiles personalizados, trazabilidad nativa (\textit{Traceability window}, \textit{Relationship Matrix}). & Curva de aprendizaje inicial en la edición de plantillas. \\
+			\\
+			StarUML & Generador oficial para C\# vía extensión. & Extensiones de generación menos maduras para personalizar el mapeo de asociaciones a colecciones tipadas. \\
+			\\
+			Visual Paradigm & \textit{Instant Generator} robusto, plantillas ORM/JPA. & Foco principal en Java/JPA; el soporte de plantillas C\#/EF Core es menos directo que en EA. \\
+			\bottomrule
+		\end{tabularx}
+	\end{center}
+	
+	Se seleccionó \textbf{Enterprise Architect} por su capacidad de edición fina de plantillas de código y documentación (\textit{Model Report}), su generación directa de código C\# a partir de los diagramas, su soporte de trazabilidad integrada (empleada en la Sección \ref{sec:modelo}) y por ser la herramienta con la que el equipo ya tenía experiencia previa, lo que facilitó el desarrollo de las prácticas sin contratiempos.
+	
+	% ===================== DESCRIPCIÓN DEL SUBSISTEMA =====================
+	\section{Descripción del subsistema del PFC modelado}
+	
+	El SIMPA es un sistema orientado a la gestión integral del cultivo de palma africana, cuyas funcionalidades principales incluyen: registro de plantaciones y lotes de cultivo; gestión de trabajadores y actividades agrícolas; registro de labores de riego, polinización y control fitosanitario; monitoreo de incidencias en el cultivo; detección de plagas y enfermedades mediante análisis de imágenes; generación de alertas y recomendaciones de tratamiento; predicción de producción y cosecha; y generación de reportes estadísticos e históricos.
+	
+	Para esta actividad se seleccionó el subsistema de \textbf{Monitoreo Fitosanitario y Gestión de Labores Agrícolas}, por ser representativo del núcleo funcional del PFC y por integrar en un solo flujo el registro de labores agrícolas, la detección de plagas mediante análisis de imágenes y la generación de alertas con recomendaciones de tratamiento — cubriendo así una porción no trivial y demostrable del sistema completo.
+	
+	\textbf{Actores principales:} agrónomo/supervisor de campo, trabajador agrícola, módulo de análisis de imágenes (servicio de IA del SIMPA).
+	
+	\textbf{Requisitos funcionales cubiertos por el subsistema modelado:}
+	\begin{itemize}[nosep]
+		\item RF-1: Registrar plantaciones y sus lotes de cultivo asociados.
+		\item RF-2: Registrar labores agrícolas (riego, polinización, control fitosanitario) por lote y trabajador.
+		\item RF-3: Registrar incidencias detectadas en un lote.
+		\item RF-4: Asociar a una incidencia una detección de plaga obtenida por análisis de imágenes.
+		\item RF-5: Generar alertas a partir de una detección de plaga.
+		\item RF-6: Emitir recomendaciones de tratamiento asociadas a una alerta.
+	\end{itemize}
+	
+	% ===================== MODELO UML =====================
+	\section{Modelo UML de origen}
+	\label{sec:modelo}
+	
+	\subsection{Diagrama de clases}
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Diagrama_Clase_SIMPA.png}
+		\caption{Diagrama de clases del subsistema de Monitoreo Fitosanitario y Gestión de Labores Agrícolas (SIMPA) finalizado y sincronizado con el codigo generado.}
+		\label{fig:sd}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Exportacion_Diagrama_Clase_SIMPA.png}
+		\caption{Captura de exportación del diagrama de clases del subsistema de Monitoreo Fitosanitario y Gestión de Labores Agrícolas (SIMPA) de Enterprise Architect.}
+		\label{fig:sd}
+	\end{figure}
+	
+	\subsection{Clases del dominio y estereotipos}
+
+	\begin{center}
+		\begin{tabularx}{\textwidth}{lXl}
+			\toprule
+			\textbf{Clase} & \textbf{Atributos principales} & \textbf{Estereotipo} \\
+			\midrule
+			Plantacion & id\_Plantacion, nombre\_Plantacion, ubicacion\_Plantacion, area\_Hectareas, fecha\_Siembre & «Entity» \\
+			Lote & id\_Lote, area\_Superficie, estado\_Actual, fecha\_Siembra & «Entity» \\
+			Trabajador & id\_Trabajador, cedula\_Trabajador, nombre\_Trabajador, rol\_Cargo, telefono & «Entity» \\
+			LaborAgricola (base) & id\_Labor, duracion\_Horas, fecha\_Laboracion, observaciones & «Entity» \\
+			LaborRiego & \textit{(verificar contra el modelo .qea)} & «Entity» \\
+			LaborPolinizacion & id\_Polinizacion, tecnica\_Polinizacion, porcentaje\_Cobertura & «Entity» \\
+			LaborFitosanitaria & producto\_Aplicado, dosis\_Litro, fecha\_Aplicacion, id\_Severidad & «Entity» \\
+			In idencia & id\_Incidencia, fecha\_Deteccion, descripcion, nivel\_Severidad, estado & «Entity» \\
+			DeteccionPlaga & id\_Deteccion, imagen (tipo \texttt{Image}), especie\_Plaga, fecha\_Analisis & «Entity» \\
+			Alertas & id\_Alarma, tipo\_Alarma, mensaje, nivel\_Urgencia, fecha\_Emision & «Entity» \\
+			Recomendaciones & id\_Recomendaciones, tratamiento\_Sugerido, dosis\_Aplicar, fecha\_Sugerida & «Entity» \\
+			\bottomrule
+		\end{tabularx}
+	\end{center}
+	
+	\subsection{Relaciones del modelo}
+	\begin{itemize}[nosep]
+		\item \textbf{Composición} Plantacion (1) --- Lote (*): un lote no existe sin su plantación.
+		\item \textbf{Asociación} Lote (1) --- LaborAgricola (*): "programa".
+		\item \textbf{Asociación} Trabajador (1) --- LaborAgricola (*): ejecuta.
+		\item \textbf{Generalización} LaborAgricola $\leftarrow$ LaborRiego, LaborPolinizacion, LaborFitosanitaria.
+		\item \textbf{Asociación} Lote (1) --- Incidencia (*).
+		\item \textbf{Agregación} Incidencia (1) --- DeteccionPlaga (1).
+		\item \textbf{Asociación} DeteccionPlaga (1) --- Alerta (*).
+		\item \textbf{Asociación} Alerta (1) --- Recomendacion (0..1).
+	\end{itemize}
+	
+	Diagramas complementarios: se recomienda incluir un diagrama de casos de uso (contexto de los tres actores) y un diagrama de estados para \texttt{Incidencia} (Detectada $\rightarrow$ En Tratamiento $\rightarrow$ Resuelta), en la medida en que aporten a la comprensión de la generación.
+	
+	El archivo nativo del modelo (\texttt{.qea}) se encuentra en \texttt{modelo/SIMPA\_MDD.qea} dentro del repositorio del equipo.
+	
+	\subsection{Trazabilidad}
+	Se verificó, mediante la ventana \textit{Traceability} de Enterprise Architect sobre la clase \texttt{Incidencia}, la consistencia de sus vínculos hacia \texttt{DeteccionPlaga}, \texttt{Alerta} y el caso de uso "Detectar plaga". Adicionalmente se empleó la \textit{Relationship Matrix} (Lote $\times$ LaborAgricola) para confirmar que ninguna clase del modelo permanece desconectada.
+    
+    	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.85\textwidth]{Trazabilidad.png}
+    	\caption{Captura de la sección de trazabilidad o "Trace" del diagrama de clase.}
+    	\label{fig:sd}
+    \end{figure}
+    
+	
+	% ===================== CONFIGURACIÓN DEL GENERADOR =====================
+	\section{Configuración del generador}
+	
+	\begin{itemize}[nosep]
+		\item \textbf{Generador utilizado:} plantilla nativa de Enterprise Architect para C\#, personalizada mediante el editor de \textit{Code Templates}.
+		\item \textbf{Versión de Enterprise Architect:} 17.1.1716.
+		\item \textbf{Lenguaje/framework objetivo:} C\# 12 / .NET 8, Entity Framework Core 8.
+		\item \textbf{Parámetros de generación:} directorio de salida \texttt{generado/Modelos/}; convención de nombres PascalCase para clases y propiedades; anotación \texttt{[Key]} sobre el atributo \texttt{id} de cada clase «Entity».
+		\item \textbf{Decisiones de mapeo documentadas:}
+		\begin{itemize}[nosep]
+			\item Asociación 1 a * $\rightarrow$ propiedad \texttt{public ICollection<T> Nombre \{ get; set; \}}.
+			\item Generalización UML $\rightarrow$ herencia de clases C\# (\texttt{class LaborRiego : LaborAgricola}).
+			\item Atributos tipados UML \texttt{Date} $\rightarrow$ \texttt{DateTime} de C\#.
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Personalizacion_CodeTemplateEditor.png}
+		\caption{Captura de la personalización de la plantilla del CodeTemplateEditor para la generación del código del diagrama de clase.}
+		\label{fig:sd}
+	\end{figure}
+	
+	
+
+	
+	% ===================== PROCESO DE GENERACIÓN =====================
+	\section{Proceso de generación y verificación del código}
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Captura_Generador_EA_Codigo.png}
+		\caption{Captura de la invocación del generador en EA y el log de salida.}
+		\label{fig:sd}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Captura_Codigo_Generado.png}
+		\caption{Captura del código C\# generado en el explorador de soluciones de Visual Studio.}
+		\label{fig:sd}
+	\end{figure}
+	
+	
+	\subsection{Correspondencia modelo $\rightarrow$ código}
+	\begin{center}
+		\begin{tabularx}{\textwidth}{lXX}
+			\toprule
+			\textbf{Elemento del modelo} & \textbf{Artefacto generado} & \textbf{Observación} \\
+			\midrule
+			Clase \texttt{Incidencia} & \texttt{Incidencia.cs} & Propiedades públicas + \texttt{[Key]} sobre \texttt{id} \\ \\
+			Atributo \texttt{nivel\_Severidad} & Campo \texttt{public string Nivel\_Severidad} & Tipo UML \texttt{String} $\rightarrow$ \texttt{string} \\ \\
+			Asociación Lote--LaborAgricola & \texttt{public ICollection <LaborAgricola> Labores} en \texttt{Lote.cs} & Mapeo 1 a * \\ \\
+			Generalización LaborAgricola & \texttt{class LaborRiego : LaborAgricola} & Herencia simple de C\# \\
+			\bottomrule
+		\end{tabularx}
+	\end{center}
+	
+	\subsection{Limitaciones observadas del generador}
+	\begin{itemize}[nosep]
+		\item El generador no produce las capas de \textit{Service} ni \textit{Controller}; estas se completan manualmente y se distinguen del código generado mediante su ubicación en carpetas separadas (\texttt{generado/Servicios}, \texttt{generado/Controllers}).
+		\item Las validaciones de negocio (por ejemplo, rangos válidos de \texttt{dosis\_Litro}) no se generan automáticamente y deben añadirse a mano sobre las clases parciales o en la capa de servicio.
+		\item El generador no crea automáticamente las migraciones de Entity Framework Core; estas se generan aparte con \texttt{dotnet ef migrations add}.
+	\end{itemize}
+	
+	% ===================== ROUNDTRIP =====================
+	\section{Cierre del ciclo (roundtrip controlado)}
+	\label{sec:roundtrip}
+	
+	Se ejecutó un cambio no trivial sobre el modelo: se agregó el atributo \texttt{coordenadasGPS} (tipo \texttt{String}) a la clase \texttt{Incidencia}, con el fin de registrar la ubicación exacta de la incidencia dentro del lote.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Captura_Antes_NPropiedad_Codigo_Generado.png}
+		\caption{Modelo ANTES del cambio de plantilla y la agregación del atributo coordenadasGPS a la clase Incidencia.}
+		\label{fig:sd}
+	\end{figure}
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Captura_Propiedad_Nueva_Codigo_Generado.png}
+		\caption{Modelo DESPUÉS del cambio — clase Incidencia con coordenadasGPS.}
+		\label{fig:sd}
+	\end{figure}
+	
+	Tras regenerar, el archivo \texttt{Incidencia.cs} incorporó la nueva propiedad \texttt{public string CoordenadasGPS \{ get; set; \}} sin afectar el código manual conservado en \texttt{generado/Servicios/}.
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Codigo_Antes_Despues_Propiedad.png}
+		\caption{Código generado ANTES y DESPUÉS, con la propiedad CoordenadasGPS resaltada y la plantilla por defecto.}
+		\label{fig:sd}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Codigo_Generado_Plantilla_Persoanlizada.png}
+		\caption{Código generado ANTES y DESPUÉS, con la propiedad CoordenadasGPS resaltada y la plantilla personalizada.}
+		\label{fig:sd}
+	\end{figure}
+	
+	% ===================== REPARTO DEL TRABAJO =====================
+	\section{Reparto del trabajo por integrante}
+	
+
+	\begin{center}
+		\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.5cm}}
+			\toprule
+			\textbf{Integrante} & \textbf{Fases lideradas} & \textbf{Commits representativos (URL)} \\
+			\midrule
+			
+			Tigasi Sampedro Paul Alexander &
+			Documentación completa en Latex, creación y administración del repositorio GitHub, elaboración del README, investigación y exploración de Enterprise Architect, validación de funcionalidades CASE, apoyo al equipo en el uso de la herramienta e integración del informe final. &
+			\href{https://github.com/ptigasis-Alexander/-PFC-SIMPA-MDD-Tigasi_Huilcapi_Vaca/commits/main/docs}{Ver commits} \\
+			
+			Huilcapi León Denisses Fabiola &
+			Configuración del generador de código, ejecución del Forward Engineering, verificación de compilación, pruebas de Round-Trip Engineering, elaboración de diapositivas y organización de reuniones del equipo. &
+			\href{https://github.com/ptigasis-Alexander/-PFC-SIMPA-MDD-Tigasi_Huilcapi_Vaca/commits/main/generado}{Ver commits} \\
+			
+			Vaca Romero David Octavio &
+			Modelado UML, aplicación de estereotipos, implementación de la trazabilidad mediante Traceability, verificación de funcionalidades de Enterprise Architect y validación del modelo de Edit Code Template. &
+			\href{https://github.com/ptigasis-Alexander/-PFC-SIMPA-MDD-Tigasi_Huilcapi_Vaca/commits/main/evidencias}{Ver commits} \\
+			
+			\bottomrule
+		\end{tabularx}
+	\end{center}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Commit_Captura.png}
+		\caption{Captura de GitHub Insights $\rightarrow$ Contributors mostrando los commits diferenciados por integrante.}
+		\label{fig:sd}
+	\end{figure}
+	
+	Todos los integrantes participan en la exposición operando en vivo la herramienta durante su segmento correspondiente, conforme al guion de exposición adjunto en \texttt{exposicion/}.
+	
+	% ===================== CONCLUSIONES =====================
+	\section{Conclusiones}
+	
+	\begin{itemize}[nosep]
+		\item La aplicación del ciclo MDD sobre el subsistema de Monitoreo Fitosanitario del SIMPA permitió reducir el trabajo manual de codificación de las clases de dominio, delegando en Enterprise Architect la generación de las propiedades, tipos y relaciones estructurales.
+		\item La edición de las plantillas de código (\textit{Code Templates}) resultó indispensable para que el mapeo de asociaciones y tipos fuera coherente con las convenciones de Entity Framework Core, en lugar de depender únicamente de la plantilla C\# genérica.
+		\item El generador no reemplaza el diseño de las capas de servicio y controladores, que continúan siendo responsabilidad del equipo; el valor de MDD radica en la generación confiable y trazable de la capa de datos, no en la automatización total del sistema.
+		\item La prueba de \textit{roundtrip} evidenció que el modelo puede evolucionar de forma segura sin perder el código manual, siempre que la política de regeneración aísle claramente las carpetas generadas de las escritas a mano.
+	\end{itemize}
+	
+	% ===================== REFERENCIAS =====================
+	\bibliographystyle{IEEEtran}
+	\bibliography{Referencias}
+	
+	% ===================== ANEXOS =====================
+	\newpage
+	\section*{Anexos}
+	\addcontentsline{toc}{section}{Anexos}
+	
+	\subsection*{Anexo A. Ejemplo ilustrativo de clase generada}
+	El siguiente fragmento ilustra la estructura de una clase generada por Enterprise Architect a partir del modelo (a completar/verificar con el código realmente generado por el equipo):
+	
+	\begin{verbatim}
+		using System;
+		using System.Collections.Generic;
+		using System.Text;
+		using System.IO;
+		
+		
+		
+		using Diagrama_Clases;
+		namespace Diagrama_Clases {
+			public class Incidencia  {
+				
+				public string descripcion {     get;     set; }
+				public string estado {     get;     set; }
+				public DateTime fecha_Deteccion {     get;     set; }
+				private int id_Incidencia {     get;     set; }
+				public string nivel_Severidad {     get;     set; }
+				
+				//Nueva propiedad agregada 
+				//-------------------------------------------
+				public string coordenadasGPS { get; set; }
+				//-------------------------------------------
+				
+				public Diagrama_Clases.Alertas m_Alertas;
+				public Diagrama_Clases.Recomendaciones m_Recomendaciones;
+				
+				public Incidencia (){
+					
+				}
+				
+				~Incidencia (){
+					
+				}
+				
+			}//end Incidencia 
+			
+		}//end namespace Diagrama_Clases
+	\end{verbatim}
+	
+
+	
+	\subsection*{Anexo B. Estructura del repositorio}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{Captura_GitHub_Carpetas.png}
+		\caption{Captura de GitHub mostrando la estructura de carpetas del repositorio.}
+		\label{fig:sd}
+	\end{figure}
+	
+
+	\begin{verbatim}
+		PFC-SIMPA-MDD-LaGeneracionIA/
+		README.md
+		docs/
+		informe.tex
+		informe.pdf
+		referencias.bib
+		figuras/
+		modelo/
+		SIMPA_MDD.qea
+		plantillas/
+		generado/
+		Modelos/
+		evidencias/
+		video-demo.mp4
+		exposicion/
+		diapositivas.pdf
+	\end{verbatim}
+	
+	
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{	Captura_Evidencia_Trabajo_Colaborativo.png}
+		\caption{Captura de GitHub mostrando la union de los colaboradores del grupo.}
+		\label{fig:sd}
+	\end{figure}
+	
+\end{document}
